@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="#"
+      th:action="@{/meals/update/{id}(id=${meal.id})}"
+      th:object="${meal}"
+      method="post">
+        <label for="name">Name</label>
+        <input type="text" th:field="*{name}" id="name" placeholder="Name">
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+
+        <hr>
+
+        <tr th:each="ingredient, itemStat : *{ingredients}">
+
+            <select id="id" th:field="*{ingredients[__${itemStat.index}__].product}" name="id">
+                <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+            </select>
+
+            <input type="text" th:field="*{ingredients[__${itemStat.index}__].quantity}" id="quantity" placeholder="Quantity">
+
+            <select id="serving" th:field="*{ingredients[__${itemStat.index}__].serving}" name="serving">
+                <option value="G">G</option>
+                <option value="TBSP">TBSP</option>
+            </select>
+
+            <br>
+        </tr>
+
+        <br>
+        <input type="submit" value="Update Meal">
+    </form>
+</body>
+</html>
