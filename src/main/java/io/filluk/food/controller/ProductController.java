@@ -66,10 +66,10 @@ public class ProductController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id, Model model){
+    public String deleteProduct(@PathVariable("id") long id, Model model){
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:"+id));
         productRepository.delete(product);
-        return "redirect:/products/index";
+        return "redirect:/meals/index";
     }
 }

@@ -5,6 +5,8 @@
   <title>Title</title>
 </head>
 <body>
+<div th:replace="/header :: header"> </div>
+
   <div th:switch="${products}">
     <h2 th:case="null">No products yet!</h2>
     <div th:case="*">

@@ -1,8 +1,15 @@
 package io.filluk.food.entity;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.annotation.SessionScope;
+
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "meals")
@@ -22,19 +29,11 @@ public class Meal {
     @JoinColumn(name = "meal_id")
     private List<Ingredient> ingredients = new ArrayList<>();
 
-    public Integer getIngredientCount() {
-        return ingredientCount;
-    }
-
-    public void setIngredientCount(Integer ingredientCount) {
-        this.ingredientCount = ingredientCount;
-    }
-    @Transient
-    Integer ingredientCount;
-
     public Meal() {
         this.name = "";
-        this.ingredientCount = 1;
+        for (int i = 0; i < 10; i++) {
+            this.addIngredient(new Ingredient());
+        }
     }
 
     public Long getId() {
@@ -67,19 +66,10 @@ public class Meal {
 
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
-        this.ingredientCount = ingredients.size()+1;
     }
 
     public void addIngredient(Ingredient ingredient){
         this.ingredients.add(ingredient);
-        this.ingredientCount++;
     }
 
-    public void add(Ingredient ingredient){
-        if(ingredients == null){
-            ingredients = new ArrayList<>();
-        }
-        ingredients.add(ingredient);
-        ingredientCount++;
-    }
 }

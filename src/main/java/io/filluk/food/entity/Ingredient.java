@@ -59,12 +59,6 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return "Ingredient{" +
-                "id=" + id +
-    //            ", meal=" + meal.getName() +
-                ", product=" + product +
-                ", serving=" + serving +
-                ", quantity=" + quantity +
-                '}';
+        return quantity + " " + serving + " " + product.getName();
     }
 }

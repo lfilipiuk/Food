@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<div th:replace="/header :: header"> </div>
 <form action="#"
       th:action="@{/products/update/{id}(id=${product.id})}"
       th:object="${product}"

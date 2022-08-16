@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <td th:text="${meal.name}"></td>
+
+    <br>
+
+    <tr th:each="ingredient : ${meal.ingredients}">
+        <td th:text="${ingredient.product != null} ? ${ingredient}"></td>
+        <br>
+    </tr>
+
+    <br>
+
+    <span>Recipe:</span><br>
+    <td th:text="${meal.recipe}"></td>
+    <br>
+    <br>
+    <span>
+        Nutrition data:
+        <table>
+            <tr>
+                <td>Calories</td>
+                <td>Carbohydrates</td>
+                <td>Sugars</td>
+                <td>Protein</td>
+                <td>Fat</td>
+            </tr>
+
+            <tr>
+            <td th:each="nutrient : ${nutrients}">
+                <span th:text="${nutrient.value}"></span>
+            </td>
+            </tr>
+
+        </table>
+
+    </span>
+</body>
+</html>
