@@ -8,7 +8,7 @@
 <div th:replace="/header :: header"> </div>
 
 <div th:switch="${cart}">
-  <h2 th:case="null">No items yet!</h2>
+  <h2 th:case="null">No items in cart yet!</h2>
   <div th:case="*">
     <h2>Cart</h2>
     <table>
@@ -18,8 +18,12 @@
       </tr>
       </thead>
       <tbody>
+      <div>Listing cart items</div>
       <tr th:each="item : ${cartItems}">
-        <td th:text="${item.name}"></td>
+        <td th:text="${item.name}">A</td>
+        <td th:text="${item.quantity}">A</td>
+        <td>+</td>
+        <td>-</td>
 <!--        <td><a th:href="@{/meals/details/{id}(id=${meal.id})}">Details</a></td>-->
       </tr>
       </tbody>

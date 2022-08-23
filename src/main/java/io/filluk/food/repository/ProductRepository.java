@@ -4,6 +4,4 @@ import io.filluk.food.entity.Product;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ProductRepository extends CrudRepository<Product, Long> {
-    //tutaj dodamy find by name
-
 }

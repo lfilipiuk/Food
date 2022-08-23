@@ -25,4 +25,8 @@ public class CartItem {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public String getName(){
+        return this.getMeal().getName();
+    }
 }

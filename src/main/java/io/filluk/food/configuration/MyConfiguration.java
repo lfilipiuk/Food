@@ -1,6 +1,5 @@
 package io.filluk.food.configuration;
 
-import io.filluk.food.entity.Ingredient;
 import io.filluk.food.entity.Meal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,4 +13,5 @@ public class MyConfiguration {
     public Meal meal(){
         return new Meal();
     }
+
 }

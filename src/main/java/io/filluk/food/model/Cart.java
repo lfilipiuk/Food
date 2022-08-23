@@ -31,11 +31,12 @@ public class Cart {
 
         if(item == null){
             item = new CartItem();
-            item.setQuantity(1);
             item.setMeal(meal);
             this.cartItems.add(item);
         }
+
         int newQuantity = item.getQuantity() + quantity;
+
         if(quantity <= 0){
             this.cartItems.remove(item);
         }else{

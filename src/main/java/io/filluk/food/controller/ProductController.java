@@ -1,7 +1,7 @@
 package io.filluk.food.controller;
 
 import io.filluk.food.entity.Product;
-import io.filluk.food.repository.ProductRepository;
+import io.filluk.food.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,16 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("products")
 public class ProductController {
 
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
     @Autowired
-    public ProductController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping("/index")
     public String showProductList(Model model) {
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("products", productService.getProducts());
         return "index";
     }
 
@@ -40,15 +40,13 @@ public class ProductController {
             return "add-product";
         }
 
-        productRepository.save(product);
+        productService.addProduct(product);
         return "redirect:/products/index";
     }
 
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model){
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
-
+        Product product = productService.findProductById(id);
         model.addAttribute("product", product);
         return "update-product";
     }
@@ -61,15 +59,14 @@ public class ProductController {
             return "update-product";
         }
 
-        productRepository.save(product);
+        productService.addProduct(product);
         return "redirect:/products/index";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") long id, Model model){
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:"+id));
-        productRepository.delete(product);
-        return "redirect:/meals/index";
+        Product product = productService.findProductById(id);
+        productService.deleteProduct(product);
+        return "redirect:/products/index";
     }
 }

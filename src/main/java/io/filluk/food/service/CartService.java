@@ -2,21 +2,16 @@ package io.filluk.food.service;
 
 import io.filluk.food.entity.Meal;
 import io.filluk.food.model.Cart;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import io.filluk.food.model.CartItem;
 
-@Service
-public class CartService {
-    @Autowired
-    Cart cart = new Cart();
+import java.util.List;
 
-    public void addToCart(Meal meal){
-        cart.addItem(meal,1);
-    }
+public interface CartService {
+    void addToCart(Meal meal);
 
-    public void removeFromCart(Meal meal) {
-        cart.removeItem(meal);
-    }
+    void removeFromCart(Meal meal);
 
+    List<CartItem> getCartItems();
 
+    Cart getCart();
 }
