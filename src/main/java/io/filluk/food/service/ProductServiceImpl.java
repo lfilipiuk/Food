@@ -1,6 +1,7 @@
 package io.filluk.food.service;
 
 import io.filluk.food.entity.Product;
+import io.filluk.food.exceptions.ProductNotFoundException;
 import io.filluk.food.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public Product addProduct(Product product) {
         productRepository.save(product);
+        return product;
     }
 
     @Override
@@ -39,9 +41,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public void deleteProductById(long id) {
+        Product product = this.findProductById(id);
+        productRepository.delete(product);
+    }
+
+    @Override
     public Product findProductById(long id) {
         return productRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid product Id:"+id));
+                .orElseThrow(() -> new ProductNotFoundException(id));
 
+    }
+
+    @Override
+    public Product updateProduct(Long id, Product product) {
+        return null;
     }
 }

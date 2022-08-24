@@ -1,4 +1,4 @@
-package io.filluk.food.controller;
+package io.filluk.food.controller.web;
 
 import io.filluk.food.entity.Ingredient;
 import io.filluk.food.entity.Meal;

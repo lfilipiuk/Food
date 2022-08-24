@@ -1,5 +1,6 @@
 package io.filluk.food.service;
 
+import io.filluk.food.entity.Ingredient;
 import io.filluk.food.entity.Meal;
 import io.filluk.food.model.Cart;
 import io.filluk.food.model.CartItem;
@@ -14,4 +15,6 @@ public interface CartService {
     List<CartItem> getCartItems();
 
     Cart getCart();
+
+    List<Ingredient> getShoppingList();
 }
