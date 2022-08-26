@@ -3,6 +3,7 @@ package io.filluk.food.service;
 import io.filluk.food.entity.Ingredient;
 import io.filluk.food.entity.Meal;
 import io.filluk.food.entity.Nutrient;
+import io.filluk.food.exceptions.MealNotFoundException;
 import io.filluk.food.repository.MealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,9 +61,11 @@ public class MealServiceImpl implements MealService {
     }
 
     @Override
-    public void addMeal(Meal meal) {
+    public Meal addMeal(Meal meal) {
         if(meal != null)
             mealRepository.save(meal);
+
+        return meal;
     }
 
     @Override
@@ -74,8 +77,13 @@ public class MealServiceImpl implements MealService {
     @Override
     public Meal findMealById(long id) {
         Meal meal = mealRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid meal Id:"+id));
+                .orElseThrow(() -> new MealNotFoundException(id));
 
         return meal;
+    }
+
+    @Override
+    public void deleteMealById(Long id) {
+        mealRepository.deleteById(id);
     }
 }

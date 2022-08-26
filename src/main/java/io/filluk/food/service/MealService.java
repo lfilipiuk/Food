@@ -11,9 +11,11 @@ public interface MealService {
 
     List<Meal> getMeals();
 
-    void addMeal(Meal meal);
+    Meal addMeal(Meal meal);
 
     void deleteMeal(Meal meal);
 
     Meal findMealById(long id);
+
+    void deleteMealById(Long id);
 }

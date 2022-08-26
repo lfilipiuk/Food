@@ -20,7 +20,6 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository = productRepository;
     }
 
-
     @Override
     public List<Product> getProducts() {
         Iterable<Product> iterable = productRepository.findAll();
@@ -28,33 +27,29 @@ public class ProductServiceImpl implements ProductService {
         return StreamSupport.stream(iterable.spliterator(), false)
                     .collect(Collectors.toList());
     }
-
     @Override
     public Product addProduct(Product product) {
         productRepository.save(product);
         return product;
     }
-
     @Override
     public void deleteProduct(Product product) {
         productRepository.delete(product);
     }
-
     @Override
     public void deleteProductById(long id) {
-        Product product = this.findProductById(id);
-        productRepository.delete(product);
+        productRepository.deleteById(id);
     }
-
     @Override
     public Product findProductById(long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException(id));
 
     }
-
     @Override
     public Product updateProduct(Long id, Product product) {
-        return null;
+        product.setId(id);
+        productRepository.save(product);
+        return product;
     }
 }

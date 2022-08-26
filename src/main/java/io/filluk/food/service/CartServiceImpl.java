@@ -11,10 +11,11 @@ import java.util.List;
 
 @Service
 public class CartServiceImpl implements CartService {
-    @Autowired
     Cart cart;
 
-    public CartServiceImpl() {
+    @Autowired
+    public CartServiceImpl(Cart cart) {
+        this.cart = cart;
     }
 
     @Override
