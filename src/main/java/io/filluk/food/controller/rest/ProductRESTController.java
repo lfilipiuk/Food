@@ -29,7 +29,7 @@ public class ProductRESTController {
         this.assembler = assembler;
     }
 
-    @CrossOrigin(origins = "http://localhost:63342")
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/products")
     //@Operation(summary = "Get a list of all products")
     public CollectionModel<EntityModel<Product>> all(){
@@ -42,7 +42,7 @@ public class ProductRESTController {
                 linkTo(methodOn(ProductRESTController.class).all()).withSelfRel());
     }
 
-    @CrossOrigin(origins = "http://localhost:63342")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/products")
     //@Operation(summary = "Create a new product")
     ResponseEntity<?> newProduct(@RequestBody Product newProduct){
@@ -53,6 +53,7 @@ public class ProductRESTController {
                 .body(entityModel);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/products/{id}")
     //@Operation(summary = "Find a product by its id")
     public EntityModel<Product> one(@PathVariable Long id){
@@ -62,7 +63,7 @@ public class ProductRESTController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:63342")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PutMapping("/products/{id}")
     //@Operation(summary = "Update a product")
     ResponseEntity<?> updateProduct(@RequestBody Product newProduct, @PathVariable Long id){
@@ -75,7 +76,7 @@ public class ProductRESTController {
                 .body(entityModel);
     }
 
-    @CrossOrigin(origins = "http://localhost:63342")
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/products/{id}")
     //@Operation(summary = "Delete a product")
     ResponseEntity<?> deleteProduct(@PathVariable Long id){
